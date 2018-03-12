@@ -21,6 +21,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import { ProfileProvider } from '../providers/profile/profile';
 import { RecipeProvider } from '../providers/recipe/recipe';
 
+import { Camera } from '@ionic-native/camera';
 @NgModule({
   declarations: [
     MyApp,
@@ -61,7 +62,8 @@ import { RecipeProvider } from '../providers/recipe/recipe';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     ProfileProvider,
-    RecipeProvider
+    RecipeProvider,
+    Camera
   ]
 })
 export class AppModule {}
