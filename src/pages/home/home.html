@@ -3,16 +3,43 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>
+      Home
+    </ion-title>
   </ion-navbar>
 </ion-header>
-
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+<ion-content padding id="page1">
+  <ion-card id="home-card21">
+    <ion-list>
+      <ion-item color="none" id="home-list-item8">
+        <ion-avatar item-left>
+          <img />
+        </ion-avatar>
+        <h2>
+          Item
+        </h2>
+      </ion-item>
+      <div style="width:100%;height:100%;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">
+        <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>
+      </div>
+      <img src="assets/img/ZtWiyCEMTUmOIcP9GGYO_Githeri-recipe-from-kenya-300x225.jpg" />
+      <ion-item id="home-list-item-container2">
+        <div id="home-markdown2" class="show-list-numbers-and-dots">
+          <p style="margin-top:0px;color:#000000;">
+            Some friendly
+            <strong>
+              markdown
+            </strong>
+          </p>
+        </div>
+      </ion-item>
+      <ion-item color="assertive" id="home-list-item9">
+        <ion-icon name="musical-notes" item-left></ion-icon>
+        Play Song
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <button id="home-button9" ion-button color="positive" block on-click="goToAddRecipe()">
+    Add Recipe
+  </button>
 </ion-content>

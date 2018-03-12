@@ -1,0 +1,17 @@
+page-recipes {
+    .recipe-name{
+        color: color($colors, primary, base);
+        font-weight: bold;
+        font-size: 14pt;
+    }
+    .cooking-time{
+        color: color($colors, dark, base);
+        font-size: 10pt;
+        font-weight: bold;
+        display:inline;
+    }
+    .cooking-time-value{
+        color: color($colors, dark, base);
+        font-size: 10pt;
+    }
+}

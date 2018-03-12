@@ -1,0 +1,26 @@
+page-recipe-detail{
+    .content{
+        background-color: color($colors, light, base);
+    }
+    .recipe-details{
+       background-color: #fff;
+    } 
+    .recipe-ingredients-count, .recipe-time, .recipe-servings{
+        text-align: center;
+    }
+    .recipe-ingredients-count div, .recipe-time div, .recipe-servings div{
+        font-size: 2.5rem;
+        text-align: center;
+        font-weight: bold;      
+    }
+    .ingredients-header {       
+        position: relative;
+        font-size: 1.7rem;        
+        letter-spacing: .1rem;
+        font-weight: bold;
+        color: color($colors, dark, base);
+        border-top: none;
+        background-color: color($colors, light, base);
+        margin-bottom: 5px;
+    }
+}
