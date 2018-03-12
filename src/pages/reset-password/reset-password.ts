@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  Alert, AlertController, IonicPage, NavController
+  Alert, AlertController,  NavController
 } from "ionic-angular";
 import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthProvider } from "../../providers/auth/auth";

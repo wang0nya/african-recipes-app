@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
   Alert,
-  AlertController, IonicPage, NavController
+  AlertController,  NavController
 } from "ionic-angular";
 import { ProfileProvider } from "../../providers/profile/profile";
 import { AuthProvider } from "../../providers/auth/auth";
