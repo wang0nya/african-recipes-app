@@ -12,8 +12,8 @@ import { AboutPage } from '../pages/about/about';
 
 import { LoginPage } from '../pages/login/login';
 
-
-
+import firebase from 'firebase';
+import { firebaseConfig } from './credentials';
 @Component({
   templateUrl: 'app.html'
 })
@@ -22,6 +22,7 @@ export class MyApp {
     rootPage:any = LoginPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+    firebase.initializeApp(firebaseConfig);
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
