@@ -9,14 +9,14 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page1">
-  <ion-card id="home-card21">
+  <ion-card id="home-card21" *ngFor="let recipe of recipeList">
     <ion-list>
       <ion-item color="none" id="home-list-item8">
         <ion-avatar item-left>
           <img />
         </ion-avatar>
         <h2>
-          Item
+          {{userProfile?.firstName}} {{userProfile?.lastName}}
         </h2>
       </ion-item>
       <div style="width:100%;height:100%;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">
@@ -26,10 +26,10 @@
       <ion-item id="home-list-item-container2">
         <div id="home-markdown2" class="show-list-numbers-and-dots">
           <p style="margin-top:0px;color:#000000;">
-            Some friendly
             <strong>
-              markdown
+              {{recipe?.name}} - 
             </strong>
+              {{recipe?.community}}
           </p>
         </div>
       </ion-item>
