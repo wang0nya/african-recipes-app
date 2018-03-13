@@ -13,6 +13,7 @@ import { PeoplePage } from '../pages/people/people';
 import { FollowersPage } from '../pages/followers/followers';
 import { FollowingPage } from '../pages/following/following';
 import { AboutPage } from '../pages/about/about';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -39,6 +40,7 @@ import { Camera } from '@ionic-native/camera';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

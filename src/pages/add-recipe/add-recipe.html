@@ -9,27 +9,38 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page7">
-  <form id="addRecipe-form5">
     <ion-item id="addRecipe-input10">
-      <ion-label>
+      <ion-label floating>
         Title
       </ion-label>
-      <ion-input type="text" placeholder="My Awesome Dish" name="title"></ion-input>
+      <ion-input type="text" name="title" [(ngModel)]="recipeName"></ion-input>
     </ion-item>
-  </form>
   <img src="assets/img/X3bachEzS4WulgCpqqkL_placeholder-category.png" style="display:block;width:50%;height:auto;margin-left:auto;margin-right:auto;" />
-  <form id="addRecipe-form6">
+    <ion-item>
+      <ion-label>Community</ion-label>
+      <ion-select [(ngModel)]="recipeCommunity" multiple="true">
+        <ion-option *ngFor="let community of (communities | async)?.communities">{{community.name}}</ion-option>
+      </ion-select>
+    </ion-item>
     <ion-item id="addRecipe-textarea2">
-      <ion-label>
+      <ion-label floating>
         Ingredients
       </ion-label>
-      <ion-textarea placeholder="250g wheat flour, ..."></ion-textarea>
+      <ion-textarea [(ngModel)]="recipeIngredients"></ion-textarea>
     </ion-item>
     <ion-item id="addRecipe-textarea3">
-      <ion-label>
+      <ion-label floating>
         Method
       </ion-label>
-      <ion-textarea placeholder="..."></ion-textarea>
+      <ion-textarea [(ngModel)]="recipeMethod"></ion-textarea>
     </ion-item>
-  </form>
+    <ion-item>
+      <ion-label floating>
+        Servings
+      </ion-label>
+      <ion-input type="number" name="servings" [(ngModel)]="recipeServings"></ion-input>
+    </ion-item>
+    <button ion-button block
+      (click)="createRecipe(recipeName, recipeIngredients, recipeCommunity, recipeServings, recipeMethod)"> Create Event
+    </button>
 </ion-content>

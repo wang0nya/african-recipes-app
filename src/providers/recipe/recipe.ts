@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import firebase from 'firebase';
+import { Reference, ThenableReference } from '@firebase/database-types';
 
 /*
   Generated class for the RecipeProvider provider.
@@ -8,9 +10,30 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class RecipeProvider {
-
+  public recipeListRef: Reference;
   constructor() {
-    console.log('Hello RecipeProvider Provider');
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.recipeListRef = firebase
+          .database().ref(`/userProfile/${user.uid}/recipeList`);
+      }
+    });
+  }
+  createRecipe(recipeName: string, recipeIngredients: string, recipeCommunity: string,
+    recipeServings: number, recipeMethod: string): ThenableReference {
+    return this.recipeListRef.push({
+      name: recipeName,
+      ingredients: recipeIngredients,
+      community: recipeCommunity,
+      servings: recipeServings,
+      method: recipeMethod
+    });
+  }
+  getRecipeList(): Reference {
+    return this.recipeListRef;
+  }
+  getRecipeDetail(recipeId: string): Reference {
+    return this.recipeListRef.child(recipeId);
   }
 
 }
