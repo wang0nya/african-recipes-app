@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { AddRecipePage } from '../add-recipe/add-recipe';
 import { RecipeProvider } from "../../providers/recipe/recipe";
 import { ProfileProvider } from "../../providers/profile/profile";
+import { RecipeDetailsPage } from '../recipe-details/recipe-details';
 
 @Component({
   selector: 'page-home',
@@ -17,6 +18,9 @@ public tap: number = 0;
   goToAddRecipe(params){
     if (!params) params = {};
     this.navCtrl.push(AddRecipePage);
+  }
+  goToRecipeDetails(recipeId):void{
+    this.navCtrl.push(RecipeDetailsPage, {recipeId: recipeId});
   }
   ionViewDidLoad() {
     this.profileProvider.getUserProfile().on("value", userProfileSnapshot => {

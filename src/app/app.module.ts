@@ -14,6 +14,7 @@ import { FollowersPage } from '../pages/followers/followers';
 import { FollowingPage } from '../pages/following/following';
 import { AboutPage } from '../pages/about/about';
 import { HttpClientModule } from '@angular/common/http';
+import { RecipeDetailsPage } from '../pages/recipe-details/recipe-details';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -36,7 +37,8 @@ import { Camera } from '@ionic-native/camera';
     PeoplePage,
     FollowersPage,
     FollowingPage,
-    AboutPage
+    AboutPage,
+    RecipeDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,8 @@ import { Camera } from '@ionic-native/camera';
     PeoplePage,
     FollowersPage,
     FollowingPage,
-    AboutPage
+    AboutPage,
+    RecipeDetailsPage
   ],
   providers: [
     StatusBar,

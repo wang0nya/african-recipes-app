@@ -9,7 +9,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page1">
-  <ion-card id="home-card21" *ngFor="let recipe of recipeList">
+  <ion-card id="home-card21" *ngFor="let recipe of recipeList" on-click="goToRecipeDetails(recipe.id)">
       <ion-item color="none" id="home-list-item8">
         <ion-avatar item-left>
           <img />
