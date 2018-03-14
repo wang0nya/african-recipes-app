@@ -11,6 +11,7 @@ import { ProfileProvider } from "../../providers/profile/profile";
 export class HomePage {
 public userProfile: any;
 public recipeList: Array<any>;
+public tap: number = 0;
   constructor(public navCtrl: NavController, public recipeProvider: RecipeProvider,public profileProvider: ProfileProvider) {
   }
   goToAddRecipe(params){
@@ -31,5 +32,8 @@ public recipeList: Array<any>;
         return false;
       });
     });
+  }
+  tapEvent(e) {
+    this.tap++
   }
 }
