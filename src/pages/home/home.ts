@@ -15,7 +15,6 @@ export class HomePage {
 public recipeListRef: Reference;
 public userProfile: any;
 public recipeList: Array<any>;
-public tap: number = 0;
 storageRef: any;
 imageRef: any;
   constructor(public navCtrl: NavController, public recipeProvider: RecipeProvider,public profileProvider: ProfileProvider
@@ -43,13 +42,10 @@ imageRef: any;
         this.recipeList.push({
           id: snap.key,
           name: snap.val().name, ingredients: snap.val().ingredients, community: snap.val().community,
-          servings: snap.val().servings, method: snap.val().method, pic: snap.val().pic
+          servings: snap.val().servings, method: snap.val().method, pic: snap.val().pic, likes: snap.val().likes
         });
         return false;
       });
     });
-  }
-  tapEvent(e) {
-    this.tap++
   }
 }

@@ -17,7 +17,6 @@ captureDataUrl: string;
 storageRef: any;
 imageRef: any;
 public recipeListRef: Reference;
-
 // https://ionicacademy.com/http-calls-ionic/
 communities: Observable<any>;
   constructor(public navCtrl: NavController, public httpClient: HttpClient,

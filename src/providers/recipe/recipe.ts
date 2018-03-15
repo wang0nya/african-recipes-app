@@ -26,7 +26,8 @@ export class RecipeProvider {
       ingredients: recipeIngredients,
       community: recipeCommunity,
       servings: recipeServings,
-      method: recipeMethod
+      method: recipeMethod,
+      likes: "0"
     });
   }
   getRecipeList(): Reference {

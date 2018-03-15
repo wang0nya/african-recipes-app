@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RecipeProvider } from "../../providers/recipe/recipe";
+import firebase from 'firebase';
+import { Reference } from '@firebase/database-types';
 
 /**
  * Generated class for the RecipeDetailsPage page.
@@ -18,7 +20,16 @@ import { RecipeProvider } from "../../providers/recipe/recipe";
 })
 export class RecipeDetailsPage {
 public currentRecipe: any = {};
+public likes: number = 0;
+public recipeListRef: Reference;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public recipeProvider: RecipeProvider) {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.recipeListRef = firebase
+          .database().ref(`/userProfile/${user.uid}/recipeList`);
+      }
+    });
   }
 
   ionViewDidLoad() {
@@ -28,5 +39,24 @@ public currentRecipe: any = {};
     });
     console.log('ionViewDidLoad RecipeDetailsPage');
   }
-
+  tapEvent(recipeId, likes: number): PromiseLike<any> {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.recipeListRef.child(`${recipeId}/likes/${user.uid}`)
+        .once("value",snapshot => {
+        const userData = snapshot.val();
+        if (userData){
+          console.log("exists!");
+          }
+        else {
+          console.log("zilch!")
+          this.recipeListRef.child(`${recipeId}/likes/${user.uid}`)
+          .set({
+            count:1
+          })
+        }
+        });
+      }
+    });
+  }
 }
