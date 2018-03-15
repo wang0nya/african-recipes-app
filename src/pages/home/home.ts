@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, NgZone  } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AddRecipePage } from '../add-recipe/add-recipe';
 import { RecipeProvider } from "../../providers/recipe/recipe";
 import { ProfileProvider } from "../../providers/profile/profile";
 import { RecipeDetailsPage } from '../recipe-details/recipe-details';
+import firebase from 'firebase';
 
 @Component({
   selector: 'page-home',
@@ -13,7 +14,17 @@ export class HomePage {
 public userProfile: any;
 public recipeList: Array<any>;
 public tap: number = 0;
-  constructor(public navCtrl: NavController, public recipeProvider: RecipeProvider,public profileProvider: ProfileProvider) {
+storageRef: any;
+imageRef: any;
+imgsource: any;
+  constructor(public navCtrl: NavController, public recipeProvider: RecipeProvider,public profileProvider: ProfileProvider
+  , public zone: NgZone) {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.storageRef = firebase.storage().ref();
+        this.imageRef = this.storageRef.child(`${user.uid}/pp.jpg`);
+      }
+    });
   }
   goToAddRecipe(params){
     if (!params) params = {};
@@ -23,6 +34,7 @@ public tap: number = 0;
     this.navCtrl.push(RecipeDetailsPage, {recipeId: recipeId});
   }
   ionViewDidLoad() {
+    this.display();
     this.profileProvider.getUserProfile().on("value", userProfileSnapshot => {
       this.userProfile = userProfileSnapshot.val();
     });
@@ -40,4 +52,11 @@ public tap: number = 0;
   tapEvent(e) {
     this.tap++
   }
+  display() {
+   this.imageRef.getDownloadURL().then((url) => {
+     this.zone.run(() => {
+       this.imgsource = url;
+        })
+     })
+    }
 }

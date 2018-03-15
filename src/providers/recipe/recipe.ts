@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import firebase from 'firebase';
 import { Reference, ThenableReference } from '@firebase/database-types';
+import firebase from 'firebase';
 
 /*
   Generated class for the RecipeProvider provider.
@@ -35,5 +35,4 @@ export class RecipeProvider {
   getRecipeDetail(recipeId: string): Reference {
     return this.recipeListRef.child(recipeId);
   }
-
 }

@@ -15,7 +15,8 @@
       </ion-label>
       <ion-input type="text" name="title" [(ngModel)]="recipeName"></ion-input>
     </ion-item>
-  <img src="assets/img/X3bachEzS4WulgCpqqkL_placeholder-category.png" style="display:block;width:50%;height:auto;margin-left:auto;margin-right:auto;" />
+    <img [src]="captureDataUrl" *ngIf="captureDataUrl" style="display:block;width:50%;height:auto;margin-left:auto;margin-right:auto;"/>
+    <img src="assets/img/X3bachEzS4WulgCpqqkL_placeholder-category.png" *ngIf="!captureDataUrl" style="display:block;width:50%;height:auto;margin-left:auto;margin-right:auto;" (click)="getPicture(0)"/>
     <ion-item>
       <ion-label>Community</ion-label>
       <ion-select [(ngModel)]="recipeCommunity" multiple="true">
