@@ -39,7 +39,7 @@ public recipeListRef: Reference;
     });
     console.log('ionViewDidLoad RecipeDetailsPage');
   }
-  tapEvent(recipeId, likes: number): PromiseLike<any> {
+  tapEvent(recipeId, likes: number) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.recipeListRef.child(`${recipeId}/likes/${user.uid}`)
