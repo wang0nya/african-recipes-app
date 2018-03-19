@@ -5,7 +5,7 @@ import { RecipeProvider } from "../../providers/recipe/recipe";
 import { ProfileProvider } from "../../providers/profile/profile";
 import { RecipeDetailsPage } from '../recipe-details/recipe-details';
 import firebase from 'firebase';
-import { Reference, ThenableReference } from '@firebase/database-types';
+import { Reference } from '@firebase/database-types';
 
 @Component({
   selector: 'page-home',
