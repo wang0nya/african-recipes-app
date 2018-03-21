@@ -1,7 +1,7 @@
 import { Component, Input, NgZone  } from '@angular/core';
 import {
   Alert,
-  AlertController,  NavController, Loading, LoadingController
+  AlertController,  NavController
 } from "ionic-angular";
 import { ProfileProvider } from "../../providers/profile/profile";
 import { AuthProvider } from "../../providers/auth/auth";
@@ -18,13 +18,11 @@ export class MyProfilePage {
   @Input('useURI') useURI: Boolean = true;
   public storageRef: any;
   public imageRef: any;
-  imgsource: any;
-  public loading: Loading;
   public userProfile: any; public birthDate: string;
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController, public authProvider: AuthProvider, public profileProvider: ProfileProvider
-  ,  private camera: Camera, public zone: NgZone, public loadingCtrl: LoadingController) {
+  ,  private camera: Camera, public zone: NgZone) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
     this.storageRef = firebase.storage().ref();
@@ -119,10 +117,7 @@ getPicture(sourceType){
         this.imageRef.getDownloadURL().then((url) => {
           this.zone.run(() => {
             this.imgsource = url;
-            this.loading.dismiss();
            })
         })
-        this.loading = this.loadingCtrl.create();
-        this.loading.present();
       }
 }
