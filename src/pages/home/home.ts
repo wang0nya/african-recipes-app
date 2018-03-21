@@ -1,5 +1,5 @@
 import { Component, NgZone} from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Loading, LoadingController } from 'ionic-angular';
 import { AddRecipePage } from '../add-recipe/add-recipe';
 import { RecipeProvider } from "../../providers/recipe/recipe";
 import { ProfileProvider } from "../../providers/profile/profile";
@@ -17,8 +17,10 @@ public userProfile: any;
 public recipeList: Array<any>;
 storageRef: any;
 imageRef: any;
+imgsource: any;
+public loading: Loading;
   constructor(public navCtrl: NavController, public recipeProvider: RecipeProvider,public profileProvider: ProfileProvider
-  , public zone: NgZone) {
+  , public zone: NgZone, public loadingCtrl: LoadingController) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.storageRef = firebase.storage().ref();
@@ -53,7 +55,10 @@ imageRef: any;
     this.imageRef.getDownloadURL().then((url) => {
       this.zone.run(() => {
         this.imgsource = url;
+        this.loading.dismiss();
        })
     })
+    this.loading = this.loadingCtrl.create();
+    this.loading.present();
   }
 }
