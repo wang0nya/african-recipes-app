@@ -16,6 +16,7 @@ public recipeListRef: Reference;
 public userProfile: any;
 public recipeList: Array<any>;
 storageRef: any;
+imgsource: any;
 imageRef: any;
   constructor(public navCtrl: NavController, public recipeProvider: RecipeProvider,public profileProvider: ProfileProvider
   , public zone: NgZone) {

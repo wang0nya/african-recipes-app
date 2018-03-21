@@ -18,6 +18,7 @@ export class MyProfilePage {
   @Input('useURI') useURI: Boolean = true;
   public storageRef: any;
   public imageRef: any;
+  imgsource: any;
   public userProfile: any; public birthDate: string;
   constructor(
     public navCtrl: NavController,
