@@ -14,8 +14,6 @@ import { Reference} from '@firebase/database-types';
 export class AddRecipePage {
 captureDataUrl: string;
 @Input('useURI') useURI: Boolean = true;
-storageRef: any;
-imageRef: any;
 public recipeListRef: Reference;
 // https://ionicacademy.com/http-calls-ionic/
 communities: Observable<any>;

@@ -11,8 +11,8 @@ import { Reference } from '@firebase/database-types';
 */
 @Injectable()
 export class ProfileProvider {
-
-  public userProfile: Reference; public currentUser: User;
+  public userProfile: Reference;
+  public currentUser: User;
   constructor() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -25,7 +25,7 @@ export class ProfileProvider {
   getUserProfile(): Reference {
     return this.userProfile;
   }
-
+  
   updateName(firstName: string, lastName: string): Promise<any> {
     return this.userProfile.update({ firstName, lastName });
   }

@@ -7,7 +7,18 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page2">
-  <img src="assets/img/80hTzdKTKu5hBP0FWxCA_il_570xN.660641478_svi4.jpg" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+  <ion-item>
+  <ion-avatar>
+  <img [src]="captureDataUrl" *ngIf="captureDataUrl" style="display:block;width:50%;height:auto;margin-left:auto;margin-right:auto;"/>
+</ion-avatar>
+  <ion-avatar>
+  <img src="{{imgsource}}" *ngIf="imgsource && !captureDataUrl" style="display:block;width:50%;height:auto;margin-left:auto;margin-right:auto;" (click)="getPicture(0)"/>
+</ion-avatar>
+  <ion-avatar>
+  <img src="assets/img/80hTzdKTKu5hBP0FWxCA_il_570xN.660641478_svi4.png" *ngIf="!captureDataUrl && !imgsource" style="display:block;width:50%;height:auto;margin-left:auto;margin-right:auto;" (click)="getPicture(0)"/>
+</ion-avatar>
+</ion-item>
+  <br>
   <ion-list>
     <ion-list-header> Personal Information
     </ion-list-header>

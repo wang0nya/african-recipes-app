@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, NgZone  } from '@angular/core';
 import {
   Alert,
   AlertController,  NavController
@@ -6,18 +6,33 @@ import {
 import { ProfileProvider } from "../../providers/profile/profile";
 import { AuthProvider } from "../../providers/auth/auth";
 import { LoginPage } from '../login/login';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import firebase from 'firebase';
 
 @Component({
   selector: 'page-my-profile',
   templateUrl: 'my-profile.html'
 })
 export class MyProfilePage {
+  captureDataUrl: string;
+  @Input('useURI') useURI: Boolean = true;
+  public storageRef: any;
+  public imageRef: any;
   public userProfile: any; public birthDate: string;
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController, public authProvider: AuthProvider, public profileProvider: ProfileProvider
-  ) { }
+  ,  private camera: Camera, public zone: NgZone) {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+    this.storageRef = firebase.storage().ref();
+    this.imageRef = this.storageRef.child(`${user.uid}/pROFILEpic.jpg`);
+    this.userProfile = firebase.database().ref(`/userProfile/${user.uid}`);
+  }
+});
+   }
   ionViewDidLoad() {
+    this.displayPic();
     this.profileProvider.getUserProfile().on("value", userProfileSnapshot => {
       this.userProfile = userProfileSnapshot.val(); this.birthDate = userProfileSnapshot.val().birthDate;
     });
@@ -80,4 +95,29 @@ export class MyProfilePage {
 //       }]
 //   }); alert.present();
 // }
+getPicture(sourceType){
+        const cameraOptions: CameraOptions = {
+          quality: 50,
+          destinationType: this.camera.DestinationType.DATA_URL,
+          encodingType: this.camera.EncodingType.JPEG,
+          mediaType: this.camera.MediaType.PICTURE,
+          sourceType: sourceType
+        };
+
+        this.camera.getPicture(cameraOptions)
+         .then((captureDataUrl) => {
+           this.captureDataUrl = 'data:image/jpeg;base64,' + captureDataUrl;
+           this.imageRef.putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL)
+
+        }, (err) => {
+            console.log(err);
+        });
+      }
+      displayPic() {
+        this.imageRef.getDownloadURL().then((url) => {
+          this.zone.run(() => {
+            this.imgsource = url;
+           })
+        })
+      }
 }
