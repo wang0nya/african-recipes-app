@@ -1,4 +1,4 @@
-import { Component, NgZone} from '@angular/core';
+import { Component} from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AddRecipePage } from '../add-recipe/add-recipe';
 import { RecipeProvider } from "../../providers/recipe/recipe";
@@ -16,10 +16,9 @@ public recipeListRef: Reference;
 public userProfile: any;
 public recipeList: Array<any>;
 storageRef: any;
-imgsource: any;
 imageRef: any;
   constructor(public navCtrl: NavController, public recipeProvider: RecipeProvider,public profileProvider: ProfileProvider
-  , public zone: NgZone) {
+  ) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.storageRef = firebase.storage().ref();
@@ -35,7 +34,6 @@ imageRef: any;
     this.navCtrl.push(RecipeDetailsPage, {recipeId: recipeId});
   }
   ionViewDidLoad() {
-    this.displayPic();
     this.profileProvider.getUserProfile().on("value", userProfileSnapshot => {
       this.userProfile = userProfileSnapshot.val();
     });
@@ -49,12 +47,5 @@ imageRef: any;
         return false;
       });
     });
-  }
-  displayPic() {
-    this.imageRef.getDownloadURL().then((url) => {
-      this.zone.run(() => {
-        this.imgsource = url;
-       })
-    })
   }
 }

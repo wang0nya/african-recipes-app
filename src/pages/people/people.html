@@ -15,9 +15,9 @@
   <ion-list>
   <ion-item *ngFor="let user of userList">
     <ion-avatar item-start>
-      <img src="{{imgsource}}">
+      <img src="{{user?.pic}}">
     </ion-avatar>
-    <h2>{{user?.firstName}}</h2>
+    <h2>{{user?.firstName}} {{user?.lastName}}</h2>
     <p>Ugh. As if.</p>
   </ion-item>
 </ion-list>

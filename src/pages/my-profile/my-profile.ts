@@ -1,4 +1,4 @@
-import { Component, Input, NgZone  } from '@angular/core';
+import { Component, Input} from '@angular/core';
 import {
   Alert,
   AlertController,  NavController
@@ -8,6 +8,7 @@ import { AuthProvider } from "../../providers/auth/auth";
 import { LoginPage } from '../login/login';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import firebase from 'firebase';
+import { Reference} from '@firebase/database-types';
 
 @Component({
   selector: 'page-my-profile',
@@ -18,22 +19,22 @@ export class MyProfilePage {
   @Input('useURI') useURI: Boolean = true;
   public storageRef: any;
   public imageRef: any;
-  imgsource: any;
+  public userProfileRef: Reference;
   public userProfile: any; public birthDate: string;
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController, public authProvider: AuthProvider, public profileProvider: ProfileProvider
-  ,  private camera: Camera, public zone: NgZone) {
+  ,  private camera: Camera) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
     this.storageRef = firebase.storage().ref();
     this.imageRef = this.storageRef.child(`${user.uid}/pROFILEpic.jpg`);
     this.userProfile = firebase.database().ref(`/userProfile/${user.uid}`);
+    this.userProfileRef = firebase.database().ref(`/userProfile/${user.uid}`);
   }
 });
    }
   ionViewDidLoad() {
-    this.displayPic();
     this.profileProvider.getUserProfile().on("value", userProfileSnapshot => {
       this.userProfile = userProfileSnapshot.val(); this.birthDate = userProfileSnapshot.val().birthDate;
     });
@@ -109,16 +110,11 @@ getPicture(sourceType){
          .then((captureDataUrl) => {
            this.captureDataUrl = 'data:image/jpeg;base64,' + captureDataUrl;
            this.imageRef.putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL)
-
-        }, (err) => {
-            console.log(err);
+           .then(savedPicture => {
+           return this.userProfileRef
+           .child(`pic`)
+           .set(savedPicture.downloadURL);
+           });
         });
-      }
-      displayPic() {
-        this.imageRef.getDownloadURL().then((url) => {
-          this.zone.run(() => {
-            this.imgsource = url;
-           })
-        })
       }
 }
