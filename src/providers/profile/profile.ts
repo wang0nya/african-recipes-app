@@ -13,12 +13,14 @@ import { Reference } from '@firebase/database-types';
 export class ProfileProvider {
   public userProfile: Reference;
   public allUserProfiles: Reference;
+  public userProfileFollowed: Reference;
   public currentUser: User;
   constructor() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.currentUser = user;
         this.userProfile = firebase.database().ref(`/userProfile/${user.uid}`);
+        this.userProfileFollowed = firebase.database().ref(`/userProfile/${user.uid}/followed`);
         this.allUserProfiles = firebase.database().ref(`/userProfile/`);
       }
     });
@@ -46,6 +48,20 @@ export class ProfileProvider {
 
   updateDOB(birthDate: string): Promise<any> {
     return this.userProfile.update({ birthDate });
+  }
+
+  updateFollow(userId: string): Promise<any> {
+    return this.userProfileFollowed
+    .orderByChild("userId").equalTo(userId).once("value",snapshot => {
+    const userData = snapshot.val();
+    if (userData){
+      console.log("exists!");
+    }
+    else {
+      this.userProfileFollowed.push({userId})
+      console.log("follow away!");
+    }
+  });
   }
 
 }

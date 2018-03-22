@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import firebase from 'firebase';
 import { ProfileProvider } from "../../providers/profile/profile";
 import { RecipeProvider } from "../../providers/recipe/recipe";
 
@@ -12,13 +11,14 @@ import { RecipeProvider } from "../../providers/recipe/recipe";
  */
 
  @IonicPage({
-   segment: 'rprofile-view/:userId'
+   segment: 'profile-view/:userId'
  })
  @Component({
   selector: 'page-profile-view',
   templateUrl: 'profile-view.html',
 })
 export class ProfileViewPage {
+  public userId: string;
   public currentUser: any = {};
   constructor(public navCtrl: NavController, public navParams: NavParams, public profileProvider: ProfileProvider
   ,public recipeProvider: RecipeProvider) {
@@ -31,6 +31,11 @@ export class ProfileViewPage {
       this.currentUser.id = userSnapshot.key;
     });
     console.log('ionViewDidLoad ProfileViewPage');
+  }
+
+  followUser(userId: string): void {
+    this.profileProvider.updateFollow(this.currentUser.id);
+    console.log('followed',this.currentUser.id)
   }
 
 }
