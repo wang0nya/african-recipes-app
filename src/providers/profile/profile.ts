@@ -12,12 +12,14 @@ import { Reference } from '@firebase/database-types';
 @Injectable()
 export class ProfileProvider {
   public userProfile: Reference;
+  public allUserProfiles: Reference;
   public currentUser: User;
   constructor() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.currentUser = user;
         this.userProfile = firebase.database().ref(`/userProfile/${user.uid}`);
+        this.allUserProfiles = firebase.database().ref(`/userProfile/`);
       }
     });
   }
@@ -25,7 +27,11 @@ export class ProfileProvider {
   getUserProfile(): Reference {
     return this.userProfile;
   }
-  
+
+  getAllUserProfiles(): Reference {
+    return this.allUserProfiles;
+  }
+
   updateName(firstName: string, lastName: string): Promise<any> {
     return this.userProfile.update({ firstName, lastName });
   }
