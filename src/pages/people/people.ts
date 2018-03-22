@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ProfileProvider } from "../../providers/profile/profile";
 import firebase from 'firebase';
+import { ProfileViewPage } from '../profile-view/profile-view';
 
 @Component({
   selector: 'page-people',
@@ -30,5 +31,9 @@ public imageRef: any;
         return false;
       });
     });
+  }
+  goToUserDetails(userId):void{
+    this.navCtrl.push(ProfileViewPage, {userId: userId});
+    console.log('you just pushed',userId)
   }
 }

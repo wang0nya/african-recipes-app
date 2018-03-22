@@ -15,7 +15,7 @@ import { FollowingPage } from '../pages/following/following';
 import { AboutPage } from '../pages/about/about';
 import { HttpClientModule } from '@angular/common/http';
 import { RecipeDetailsPage } from '../pages/recipe-details/recipe-details';
-
+import { ProfileViewPage } from '../pages/profile-view/profile-view';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -38,7 +38,8 @@ import { Camera } from '@ionic-native/camera';
     FollowersPage,
     FollowingPage,
     AboutPage,
-    RecipeDetailsPage
+    RecipeDetailsPage,
+    ProfileViewPage
   ],
   imports: [
     BrowserModule,
@@ -59,7 +60,8 @@ import { Camera } from '@ionic-native/camera';
     FollowersPage,
     FollowingPage,
     AboutPage,
-    RecipeDetailsPage
+    RecipeDetailsPage,
+    ProfileViewPage
   ],
   providers: [
     StatusBar,

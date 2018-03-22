@@ -28,6 +28,10 @@ export class ProfileProvider {
     return this.userProfile;
   }
 
+  getUserDetail(userId: string): Reference {
+    return this.allUserProfiles.child(userId);
+  }
+
   getAllUserProfiles(): Reference {
     return this.allUserProfiles;
   }
