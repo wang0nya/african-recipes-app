@@ -21,6 +21,7 @@ export class MyProfilePage {
   public imageRef: any;
   public userProfileRef: Reference;
   public userProfile: any; public birthDate: string;
+  public status: string;
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController, public authProvider: AuthProvider, public profileProvider: ProfileProvider
@@ -37,6 +38,7 @@ export class MyProfilePage {
   ionViewDidLoad() {
     this.profileProvider.getUserProfile().on("value", userProfileSnapshot => {
       this.userProfile = userProfileSnapshot.val(); this.birthDate = userProfileSnapshot.val().birthDate;
+      this.status = userProfileSnapshot.val().status;
     });
   }
   logOut(): void {
@@ -64,39 +66,13 @@ export class MyProfilePage {
     });
     alert.present();
   }
+  updateStatus(status: string): void {
+    this.profileProvider.updateStatus(status);
+  }
   updateDOB(birthDate: string): void {
     this.profileProvider.updateDOB(birthDate);
   }
-//   updateEmail(): void {
-//     let alert: Alert = this.alertCtrl.create({
-//       inputs: [{ name: 'newEmail', placeholder: 'Your new email' },
-//       { name: 'password', placeholder: 'Your password', type: 'password' }], buttons: [
-//         { text: 'Cancel' }, {
-//           text: 'Save',
-//           handler: data => {
-//             this.profileProvider
-//             .updateEmail(data.newEmail, data.password)
-//             .then(() => { console.log('Email Changed Successfully'); })
-//             .catch (error => { console.log('ERROR: ' + error.message); });
-//           }
-//         }]
-//     });
-//     alert.present();
-//   }
-//
-// updatePassword(): void {
-//   let alert: Alert = this.alertCtrl.create({
-//     inputs: [
-//       { name: 'newPassword', placeholder: 'New password', type: 'password' }, { name: 'oldPassword', placeholder: 'Old password', type: 'password' }],
-//     buttons: [
-//       { text: 'Cancel' }, {
-//         text: 'Save',
-//         handler: data => {
-//           this.profileProvider.updatePassword(data.newPassword, data.oldPassword);
-//         }
-//       }]
-//   }); alert.present();
-// }
+
 getPicture(sourceType){
         const cameraOptions: CameraOptions = {
           quality: 50,

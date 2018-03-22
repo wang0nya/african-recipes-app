@@ -24,7 +24,8 @@ public imageRef: any;
       this.userList = []; userProfileSnapshot.forEach(snap => {
         this.userList.push({
           id: snap.key,
-          firstName: snap.val().firstName, lastName: snap.val().lastName, pic: snap.val().pic
+          firstName: snap.val().firstName, lastName: snap.val().lastName, pic: snap.val().pic,
+          status: snap.val().status
         });
         return false;
       });
