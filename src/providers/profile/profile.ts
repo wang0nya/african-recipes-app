@@ -58,10 +58,18 @@ export class ProfileProvider {
       console.log("exists!");
     }
     else {
-      this.userProfileFollowed.push({userId})
+      this.userProfileFollowed.push({userId});
       console.log("follow away!");
     }
   });
+  }
+
+  deleteFollow(userId: string): Promise<any> {
+    return this.userProfileFollowed
+    .orderByChild("userId").equalTo(userId).once("value",snapshot => {
+      // https://stackoverflow.com/questions/45339899/firebase-query-removing-all-elements
+    snapshot.forEach(child => child.ref.remove())
+    });
   }
 
 }

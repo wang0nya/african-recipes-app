@@ -18,6 +18,7 @@ import { RecipeProvider } from "../../providers/recipe/recipe";
   templateUrl: 'profile-view.html',
 })
 export class ProfileViewPage {
+  userData: any;
   public userId: string;
   public currentUser: any = {};
   constructor(public navCtrl: NavController, public navParams: NavParams, public profileProvider: ProfileProvider
@@ -30,12 +31,31 @@ export class ProfileViewPage {
       this.currentUser = userSnapshot.val();
       this.currentUser.id = userSnapshot.key;
     });
-    console.log('ionViewDidLoad ProfileViewPage');
+    this.followed(this.userId);
   }
 
   followUser(userId: string): void {
     this.profileProvider.updateFollow(this.currentUser.id);
     console.log('followed',this.currentUser.id)
+  }
+
+  unfollowUser(userId: string): void {
+    this.profileProvider.deleteFollow(this.currentUser.id);
+    console.log('unfollowed',this.currentUser.id)
+  }
+
+  followed(userId: string): void {
+    this.profileProvider.userProfileFollowed
+    .orderByChild("userId").equalTo(this.currentUser.id).once("value",snapshot => {
+    const userData = snapshot.val();
+    if (userData){
+      this.userData=true;
+      console.log("you already followed the guy man!");
+    }
+    else {
+      console.log("worth following? go ahead!");
+    }
+  });
   }
 
 }

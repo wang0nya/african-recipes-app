@@ -9,7 +9,8 @@
   <ion-navbar>
     <ion-title>{{currentUser?.firstName}} {{currentUser?.lastName}}</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="followUser()"> <ion-icon name="add-circle"></ion-icon>
+      <button ion-button icon-only *ngIf="!this.userData==true" (click)="followUser()"> <ion-icon name="add-circle"></ion-icon></button>
+        <button ion-button icon-only *ngIf="this.userData==true" (click)="unfollowUser()"> <ion-icon name="close-circle"></ion-icon>
 </button> </ion-buttons>
   </ion-navbar>
 
