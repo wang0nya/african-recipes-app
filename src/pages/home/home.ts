@@ -47,5 +47,18 @@ imageRef: any;
         return false;
       });
     });
+    this.followed();
+  }
+  followed(): void {
+    this.profileProvider.userProfileFollowed
+    .once("value",snapshot => {
+    const userData = snapshot.val();
+    if (userData){
+      console.log("you followed these guys:", userData);
+    }
+    else {
+      console.log("something went wrong...");
+    }
+  });
   }
 }
