@@ -64,11 +64,15 @@ export class ProfileProvider {
   });
   }
 
-  deleteFollow(userId: string): Promise<any> {
+  deleteFollow(userId: string) {
     return this.userProfileFollowed
     .orderByChild("userId").equalTo(userId).once("value",snapshot => {
       // https://stackoverflow.com/questions/45339899/firebase-query-removing-all-elements
-    snapshot.forEach(child => child.ref.remove())
+    snapshot.forEach((child) => {
+    child.ref.remove();
+    // https://stackoverflow.com/questions/39845758/argument-of-type-snap-datasnapshot-void-is-not-assignable-to-parameter-o
+    return false;
+      });
     });
   }
 

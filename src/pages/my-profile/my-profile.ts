@@ -39,6 +39,7 @@ export class MyProfilePage {
     this.profileProvider.getUserProfile().on("value", userProfileSnapshot => {
       this.userProfile = userProfileSnapshot.val(); this.birthDate = userProfileSnapshot.val().birthDate;
       this.status = userProfileSnapshot.val().status;
+      this.followed = userProfileSnapshot.val().followed_count;
     });
   }
   logOut(): void {
