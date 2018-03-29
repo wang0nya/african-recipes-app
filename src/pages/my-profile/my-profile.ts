@@ -22,6 +22,7 @@ export class MyProfilePage {
   public userProfileRef: Reference;
   public userProfile: any; public birthDate: string;
   public status: string;
+  public followed: string;
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController, public authProvider: AuthProvider, public profileProvider: ProfileProvider
