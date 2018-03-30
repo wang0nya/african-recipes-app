@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import firebase from 'firebase';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Reference} from '@firebase/database-types';
+import { ProfileProvider } from "../../providers/profile/profile";
 
 @Component({
   selector: 'page-add-recipe',
@@ -15,10 +16,11 @@ export class AddRecipePage {
 captureDataUrl: string;
 @Input('useURI') useURI: Boolean = true;
 public recipeListRef: Reference;
+public currentUserMe: any = {};
 // https://ionicacademy.com/http-calls-ionic/
 communities: Observable<any>;
   constructor(public navCtrl: NavController, public httpClient: HttpClient,
-  public recipeProvider: RecipeProvider, private camera: Camera) {
+  public recipeProvider: RecipeProvider, private camera: Camera, public profileProvider: ProfileProvider) {
     this.communities = this.httpClient.get('http://siridesigns.co.ke/communities.json');
     this.communities
     .subscribe(data => {
@@ -26,9 +28,9 @@ communities: Observable<any>;
     })
   }
 createRecipe(recipeName: string, recipeIngredients: string, recipeCommunity: string,
-  recipeServings: number, recipeMethod: string): void {
+  recipeServings: number, recipeMethod: string, currentUserMe): void {
     this.recipeProvider
-      .createRecipe(recipeName, recipeIngredients, recipeCommunity, recipeServings, recipeMethod).then(newRecipe => {
+      .createRecipe(recipeName, recipeIngredients, recipeCommunity, recipeServings, recipeMethod, this.currentUserMe).then(newRecipe => {
         firebase
         .storage()
         .ref(`${newRecipe.key}/pic.jpg`)
@@ -57,16 +59,10 @@ getPicture(sourceType){
             console.log(err);
         });
       }
-// ionViewWillLeave() {
-//       this.uploadPic();
-//     console.log("Looks like I'm about to leave :(");
-//   }
-// uploadPic(recipeId: string) : PromiseLike<any> {
-//   this.imageRef.putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL)
-//   .then(savedPicture => {
-//   return this.recipeListRef
-//   .child(`${recipeId}/pic`)
-//   .push(savedPicture.downloadURL);
-//   });
-//   }
+      ionViewDidLoad() {
+        this.profileProvider.getUserProfile().on("value", userSnapshot => {
+          this.currentUserMe = userSnapshot.val();
+          console.log('ok, its me', userSnapshot.val())
+        });
+      }
 }

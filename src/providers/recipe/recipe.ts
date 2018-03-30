@@ -20,13 +20,14 @@ export class RecipeProvider {
     });
   }
   createRecipe(recipeName: string, recipeIngredients: string, recipeCommunity: string,
-    recipeServings: number, recipeMethod: string): ThenableReference {
+    recipeServings: number, recipeMethod: string, currentUserMe): ThenableReference {
     return this.recipeListRef.push({
       name: recipeName,
       ingredients: recipeIngredients,
       community: recipeCommunity,
       servings: recipeServings,
       method: recipeMethod,
+      chef: currentUserMe,
       likes: "0"
     });
   }

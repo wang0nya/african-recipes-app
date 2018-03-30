@@ -31,8 +31,8 @@ export class MyProfilePage {
       if (user) {
     this.storageRef = firebase.storage().ref();
     this.imageRef = this.storageRef.child(`${user.uid}/pROFILEpic.jpg`);
-    this.userProfile = firebase.database().ref(`/userProfile/${user.uid}`);
-    this.userProfileRef = firebase.database().ref(`/userProfile/${user.uid}`);
+    this.userProfile = firebase.database().ref(`/userProfile/${user.uid}/profile`);
+    this.userProfileRef = firebase.database().ref(`/userProfile/${user.uid}/profile`);
   }
 });
    }

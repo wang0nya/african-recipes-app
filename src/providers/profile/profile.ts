@@ -19,7 +19,7 @@ export class ProfileProvider {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.currentUser = user;
-        this.userProfile = firebase.database().ref(`/userProfile/${user.uid}`);
+        this.userProfile = firebase.database().ref(`/userProfile/${user.uid}/profile`);
         this.userProfileFollowed = firebase.database().ref(`/userProfile/${user.uid}/followed`);
         this.allUserProfiles = firebase.database().ref(`/userProfile/`);
       }
