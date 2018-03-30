@@ -19,12 +19,6 @@ public recipeListRef: Reference;
 communities: Observable<any>;
   constructor(public navCtrl: NavController, public httpClient: HttpClient,
   public recipeProvider: RecipeProvider, private camera: Camera) {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.recipeListRef = firebase
-          .database().ref(`/userProfile/${user.uid}/recipeList`);
-      }
-    });
     this.communities = this.httpClient.get('http://siridesigns.co.ke/communities.json');
     this.communities
     .subscribe(data => {
@@ -40,7 +34,7 @@ createRecipe(recipeName: string, recipeIngredients: string, recipeCommunity: str
         .ref(`${newRecipe.key}/pic.jpg`)
         .putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL)
         .then(savedPicture => {
-        return this.recipeListRef
+        return this.recipeProvider.recipeListRef
         .child(`${newRecipe.key}/pic`)
         .set(savedPicture.downloadURL);
         });

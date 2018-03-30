@@ -15,7 +15,7 @@ export class RecipeProvider {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.recipeListRef = firebase
-          .database().ref(`/userProfile/${user.uid}/recipeList`);
+          .database().ref(`/recipeList`);
       }
     });
   }

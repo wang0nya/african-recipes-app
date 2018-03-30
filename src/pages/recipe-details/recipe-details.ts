@@ -24,12 +24,7 @@ public likes: number = 0;
 public recipeListRef: Reference;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public recipeProvider: RecipeProvider) {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.recipeListRef = firebase
-          .database().ref(`/userProfile/${user.uid}/recipeList`);
-      }
-    });
+
   }
 
   ionViewDidLoad() {
@@ -42,7 +37,7 @@ public recipeListRef: Reference;
   tapEvent(recipeId, likes: number) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.recipeListRef.child(`${recipeId}/likes/${user.uid}`)
+        this.recipeProvider.recipeListRef.child(`${recipeId}/likes/${user.uid}`)
         .once("value",snapshot => {
         const userData = snapshot.val();
         if (userData){
@@ -50,7 +45,7 @@ public recipeListRef: Reference;
           }
         else {
           console.log("zilch!")
-          this.recipeListRef.child(`${recipeId}/likes/${user.uid}`)
+          this.recipeProvider.recipeListRef.child(`${recipeId}/likes/${user.uid}`)
           .set({
             count:1
           })
