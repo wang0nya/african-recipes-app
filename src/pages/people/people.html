@@ -10,14 +10,14 @@
 </ion-header>
 <ion-content padding id="page8">
   <form id="people-form8">
-    <ion-searchbar placeholder="search people" name="" id="people-search2"></ion-searchbar>
+    <ion-searchbar placeholder="search people" name="" id="people-search2" (ionInput)="getItems($event)"></ion-searchbar>
   </form>
   <ion-list>
   <ion-item *ngFor="let user of userList" on-click="goToUserDetails(user.id)">
     <ion-avatar item-start>
       <img src="{{user?.pic}}">
     </ion-avatar>
-    <h2>{{user?.firstName}} {{user?.lastName}}</h2>
+    <h2>{{user.firstName}} {{user?.lastName}}</h2>
     <p>{{user?.status}}</p>
   </ion-item>
 </ion-list>

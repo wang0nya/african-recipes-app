@@ -12,6 +12,7 @@ import { Reference } from '@firebase/database-types';
 @Injectable()
 export class ProfileProvider {
   public userProfile: Reference;
+  public myUserProfile: Reference;
   public allUserProfiles: Reference;
   public userProfileFollowed: Reference;
   public currentUser: User;
