@@ -26,17 +26,3 @@ exports.countfollowedchange = functions.database.ref('/userProfile/{userid}/foll
     return console.log('Counter updated.');
   });
 });
-
-// If the number of followed gets deleted, recount the number of likes
-exports.recountfollowed = functions.database.ref('/userProfile/{userid}/followed_count').onWrite((event) => {
-  if (!event.data.exists()) {
-    const counterRef = event.data.ref;
-    const collectionRef = counterRef.parent.child('followed');
-
-    // Return the promise from counterRef.set() so our function
-    // waits for this async event to complete before it exits.
-    return collectionRef.once('value')
-      .then((messagesData) => counterRef.set(messagesData.numChildren()));
-  }
-  return null;
-});
