@@ -33,7 +33,7 @@ export class ProfileViewPage {
       this.currentUser = userSnapshot.val().profile;
       this.currentUser.id = userSnapshot.key;
     });
-    this.profileProvider.getUserProfile().on("value", userSnapshot => {
+    this.profileProvider.getMyUserProfile().on("value", userSnapshot => {
       this.currentUserMe = userSnapshot.val();
       this.currentUserMe.id = userSnapshot.key;
       console.log('ok, its me', userSnapshot.key)

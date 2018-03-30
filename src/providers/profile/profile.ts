@@ -20,6 +20,7 @@ export class ProfileProvider {
       if (user) {
         this.currentUser = user;
         this.userProfile = firebase.database().ref(`/userProfile/${user.uid}/profile`);
+        this.myUserProfile = firebase.database().ref(`/userProfile/${user.uid}`);
         this.userProfileFollowed = firebase.database().ref(`/userProfile/${user.uid}/followed`);
         this.allUserProfiles = firebase.database().ref(`/userProfile/`);
       }
@@ -28,6 +29,10 @@ export class ProfileProvider {
 
   getUserProfile(): Reference {
     return this.userProfile;
+  }
+
+  getMyUserProfile(): Reference {
+    return this.myUserProfile;
   }
 
   getUserDetail(userId: string): Reference {
