@@ -30,7 +30,7 @@ export class ProfileViewPage {
 
   ionViewDidLoad() {
     this.profileProvider.getUserDetail(this.navParams.get("userId")).on("value", userSnapshot => {
-      this.currentUser = userSnapshot.val();
+      this.currentUser = userSnapshot.val().profile;
       this.currentUser.id = userSnapshot.key;
     });
     this.profileProvider.getUserProfile().on("value", userSnapshot => {

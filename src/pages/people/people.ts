@@ -22,11 +22,13 @@ public imageRef: any;
   }
   ionViewDidLoad() {
     this.profileProvider.getAllUserProfiles().on("value", userProfileSnapshot => {
-      this.userList = []; userProfileSnapshot.forEach(snap => {
+      this.userList = [];
+      userProfileSnapshot.forEach(snap => {
+        console.log(snap.val())
         this.userList.push({
           id: snap.key,
-          firstName: snap.val().firstName, lastName: snap.val().lastName, pic: snap.val().pic,
-          status: snap.val().status
+          firstName: snap.val().profile.firstName, lastName: snap.val().profile.lastName, pic: snap.val().profile.pic,
+          status: snap.val().profile.status
         });
         return false;
       });
