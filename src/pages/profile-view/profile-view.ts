@@ -19,8 +19,10 @@ import { RecipeProvider } from "../../providers/recipe/recipe";
 })
 export class ProfileViewPage {
   userData: any;
+  me: any;
   public userId: string;
   public currentUser: any = {};
+  public currentUserMe: any = {};
   constructor(public navCtrl: NavController, public navParams: NavParams, public profileProvider: ProfileProvider
   ,public recipeProvider: RecipeProvider) {
 
@@ -31,6 +33,11 @@ export class ProfileViewPage {
       this.currentUser = userSnapshot.val();
       this.currentUser.id = userSnapshot.key;
     });
+    this.profileProvider.getUserProfile().on("value", userSnapshot => {
+      this.currentUserMe = userSnapshot.val();
+      this.currentUserMe.id = userSnapshot.key;
+      console.log('ok, its me', userSnapshot.key)
+    });
     this.followed(this.userId);
   }
 
@@ -38,6 +45,10 @@ export class ProfileViewPage {
     this.profileProvider.updateFollow(this.currentUser.id);
     console.log('followed',this.currentUser.id)
   }
+
+  // checkIfSelf() {
+  //
+  // }
 
   unfollowUser(userId: string): void {
     this.profileProvider.deleteFollow(this.currentUser.id);
@@ -50,10 +61,11 @@ export class ProfileViewPage {
     const userData = snapshot.val();
     if (userData){
       this.userData=true;
-      console.log("you already followed the guy man!");
+      console.log("already followed!");
     }
-    else {
-      console.log("worth following? go ahead!");
+    else if (this.currentUserMe.id == this.currentUser.id){
+      this.me=true;
+      console.log("cant follow yourself. sorry.");
     }
   });
   }
