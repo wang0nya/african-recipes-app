@@ -12,10 +12,10 @@
   <ion-card id="home-card21" *ngFor="let recipe of recipeList">
       <ion-item color="none" id="home-list-item8">
         <ion-avatar item-left>
-          <img src="{{userProfile?.pic}}"/>
+          <img src="{{recipe?.ppic}}"/>
         </ion-avatar>
         <h2>
-          {{userProfile?.firstName}} {{userProfile?.lastName}}
+          {{recipe?.firstName}} {{recipe?.lastName}}
         </h2>
       </ion-item>
       <div style="width:100%;height:100%;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">
