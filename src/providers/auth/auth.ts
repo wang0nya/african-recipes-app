@@ -22,8 +22,11 @@ export class AuthProvider {
       .auth()
       .createUserWithEmailAndPassword(email, password).then(newUser => {
         firebase
-          .database().ref(`/userProfile/${newUser.uid}/profile/email`)
-          .set(email);
+          .database().ref(`/userProfile/${newUser.uid}/profile`)
+          .set({
+            email,
+            uid: newUser.uid,
+          });
       })
       .catch(error => {
         console.error(error); throw new Error(error);
