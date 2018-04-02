@@ -18,7 +18,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="card-background-page">
   <ion-item>
   <ion-avatar>
   <img src="{{currentUser?.pic}}"  style="display:block;width:50%;height:auto;margin-left:auto;margin-right:auto;"/>
@@ -28,7 +28,9 @@
 </ion-item>
   <ion-list-header> Recipes
   </ion-list-header>
-  <ion-item>
-  <img src="{{currentUser?.pic}}"  style="display:block;width:50%;height:auto;margin-left:auto;margin-right:auto;"/>
-</ion-item>
+  <ion-card *ngFor="let recipe of recipeList">
+      <img src="{{recipe?.pic}}" on-click="goToRecipeDetails(recipe.id)" style="display:block;width:auto;height:50vh;margin-left:auto;margin-right:auto;"/>
+      <div class="card-title">{{recipe?.name}}</div>
+      <div class="card-subtitle">{{recipe?.community}}</div>
+  </ion-card>
 </ion-content>

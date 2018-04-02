@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProfileProvider } from "../../providers/profile/profile";
 import { RecipeProvider } from "../../providers/recipe/recipe";
+import { RecipeDetailsPage } from '../recipe-details/recipe-details';
 
 /**
  * Generated class for the ProfileViewPage page.
@@ -20,6 +21,7 @@ import { RecipeProvider } from "../../providers/recipe/recipe";
 export class ProfileViewPage {
   userData: any;
   me: any;
+  public recipeList: Array<any>;
   public userId: string;
   public currentUser: any = {};
   public currentUserMe: any = {};
@@ -38,6 +40,20 @@ export class ProfileViewPage {
       this.currentUserMe.id = userSnapshot.key;
       console.log('ok, its me', userSnapshot.key)
     });
+    this.recipeProvider.getRecipeList()
+    .on("value", recipeListSnapshot => {
+      this.recipeList = []; recipeListSnapshot.forEach(snap => {
+        if(this.currentUser.id == snap.val().chef.uid){
+          this.recipeList.push({
+            id: snap.key,
+            name: snap.val().name, ingredients: snap.val().ingredients, community: snap.val().community,
+            servings: snap.val().servings, method: snap.val().method, pic: snap.val().pic, likes: snap.val().likes,
+            firstName: snap.val().chef.firstName, lastName: snap.val().chef.lastName, ppic: snap.val().chef.pic
+          });
+        }
+        return false;
+      });
+    });
     this.followed(this.userId);
   }
 
@@ -46,9 +62,9 @@ export class ProfileViewPage {
     console.log('followed',this.currentUser.id)
   }
 
-  // checkIfSelf() {
-  //
-  // }
+  goToRecipeDetails(recipeId):void{
+    this.navCtrl.push(RecipeDetailsPage, {recipeId: recipeId});
+  }
 
   unfollowUser(userId: string): void {
     this.profileProvider.deleteFollow(this.currentUser.id);
