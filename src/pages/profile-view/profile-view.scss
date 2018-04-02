@@ -6,6 +6,12 @@ page-profile-view {
       text-align: center;
     }
 
+    .img-container { background-color: #000000; }
+    .img-container img { opacity: 0.5;
+      // https://medium.com/@chrisnager/center-and-crop-images-with-a-single-line-of-css-ad140d5b4a87
+      object-fit: cover;
+     }
+
     .card-title {
       position: absolute;
       top: 36%;
