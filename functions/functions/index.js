@@ -49,3 +49,26 @@ exports.countlikeschange = functions.database.ref('/recipeList/{recipeid}/likes/
     return console.log('likes_Counter updated.');
   });
 });
+
+// Keeps track of the length of the 'comments' child list in a separate property.
+exports.countcommentschange = functions.database.ref('/recipeList/{recipeid}/comments/{commentid}').onWrite((event) => {
+  const comments_collectionRef = event.data.ref.parent;
+  const comments_countRef = comments_collectionRef.parent.child('comments_count');
+
+  let comments_increment;
+  if (event.data.exists() && !event.data.previous.exists()) {
+    comments_increment = 1;
+  } else if (!event.data.exists() && event.data.previous.exists()) {
+    comments_increment = -1;
+  } else {
+    return null;
+  }
+
+  // Return the promise from countRef.transaction() so our function
+  // waits for this async event to complete before it exits.
+  return comments_countRef.transaction((comments_current) => {
+    return (comments_current || 0) + comments_increment;
+  }).then(() => {
+    return console.log('comments_Counter updated.');
+  });
+});
