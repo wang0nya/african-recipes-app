@@ -4,7 +4,7 @@ import { RecipeProvider } from "../../providers/recipe/recipe";
 import firebase from 'firebase';
 import { Reference } from '@firebase/database-types';
 import { ProfileProvider } from "../../providers/profile/profile";
-import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 /**
  * Generated class for the RecipeDetailsPage page.
  *
