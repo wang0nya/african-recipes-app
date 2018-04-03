@@ -37,6 +37,7 @@
     "firebase-functions": "^0.9.1",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
+    "marked": "^0.3.19",
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",
     "zone": "^0.3.4",

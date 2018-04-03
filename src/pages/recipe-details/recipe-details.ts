@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { RecipeProvider } from "../../providers/recipe/recipe";
 import firebase from 'firebase';
 import { Reference } from '@firebase/database-types';
 import { ProfileProvider } from "../../providers/profile/profile";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import marked from 'marked';
 /**
  * Generated class for the RecipeDetailsPage page.
  *
@@ -20,6 +21,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   templateUrl: 'recipe-details.html',
 })
 export class RecipeDetailsPage {
+  @ViewChild(Content) content: Content;
 public currentUserMe: any = {};
 public currentRecipe: any = {};
 public currentRecipeChef: any = {};
@@ -44,6 +46,8 @@ public onButtonClick() {
       this.currentRecipe = recipeSnapshot.val();
       this.currentRecipeChef = recipeSnapshot.val().chef;
       this.currentRecipe.id = recipeSnapshot.key;
+      this.markdownText = marked(recipeSnapshot.val().method.toString())
+      this.content = this.markdownText
     });
     this.recipeProvider.getRecipeComments(this.navParams.get("recipeId")).on("value", recipeCommentSnapshot => {
       this.recipeCommentsList = []; recipeCommentSnapshot.forEach(snap => {

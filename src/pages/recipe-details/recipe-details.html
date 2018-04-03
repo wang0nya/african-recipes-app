@@ -12,7 +12,9 @@
     </ion-card-content>
     <ion-card-content>
       <h2><strong>Method</strong></h2>
+      <div [innerHtml]="content">
       <p>{{currentRecipe?.method}}</p>
+      </div>
     </ion-card-content>
     <ion-row>
       <ion-col>
