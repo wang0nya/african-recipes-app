@@ -24,13 +24,13 @@
   <ion-grid>
   <ion-row>
     <ion-col col-4>
-      <ion-item text-center>recipes</ion-item>
+      <ion-item text-center>recipes<ion-badge id="badge">60</ion-badge></ion-item>
     </ion-col>
     <ion-col col-4>
-      <ion-item text-center>followers</ion-item>
+      <ion-item text-center>followers<ion-badge id="badge">26</ion-badge></ion-item>
     </ion-col>
     <ion-col col-4>
-      <ion-item text-center>{{userProfile?.followed_count}} following</ion-item>
+      <ion-item text-center>following<ion-badge id="badge">{{userProfile?.followed_count}}</ion-badge></ion-item>
     </ion-col>
   </ion-row>
   </ion-grid>
