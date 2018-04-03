@@ -38,7 +38,6 @@ export class ProfileViewPage {
     this.profileProvider.getMyUserProfile().on("value", userSnapshot => {
       this.currentUserMe = userSnapshot.val();
       this.currentUserMe.id = userSnapshot.key;
-      console.log('ok, its me', userSnapshot.key)
     });
     this.recipeProvider.getRecipeList()
     .on("value", recipeListSnapshot => {
