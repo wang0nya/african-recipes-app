@@ -29,6 +29,7 @@ public recipeCommentsList: Array<any>;
 public recipeListRef: Reference;
 public commentArea: FormGroup;
 public likes_sum: number;
+public markdownText: any;
 // https://stackoverflow.com/questions/42392137/hide-and-show-on-click-in-the-ionic-2
 public buttonClicked: boolean = false; //Whatever you want to initialise it as
 public onButtonClick() {
