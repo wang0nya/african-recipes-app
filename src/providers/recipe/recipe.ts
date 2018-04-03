@@ -37,4 +37,7 @@ export class RecipeProvider {
   getRecipeDetail(recipeId: string): Reference {
     return this.recipeListRef.child(recipeId);
   }
+  getRecipeComments(recipeId: string): Reference {
+    return this.recipeListRef.child(recipeId+'/comments');
+  }
 }

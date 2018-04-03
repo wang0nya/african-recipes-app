@@ -10,6 +10,10 @@
       <p>Serving: <strong>{{currentRecipe?.servings}}</strong></p>
       <p>Ingredients: <strong>{{currentRecipe?.ingredients}}</strong></p>
     </ion-card-content>
+    <ion-card-content>
+      <h2><strong>Method</strong></h2>
+      <p>{{currentRecipe?.method}}</p>
+    </ion-card-content>
     <ion-row>
       <ion-col>
         <button ion-button icon-left clear small (tap)="tapEvent(currentRecipe.id)">
@@ -18,9 +22,9 @@
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button icon-left clear small>
+        <button ion-button icon-left clear small (click)="onButtonClick()">
           <ion-icon name="text"></ion-icon>
-          <div>4 Comments</div>
+          <div>{{currentRecipe?.comments_count}}</div>
         </button>
       </ion-col>
       <ion-col center text-center>
@@ -29,9 +33,33 @@
         </ion-note>
       </ion-col>
     </ion-row>
-    <ion-card-content>
-      <h2><strong>Method</strong></h2>
-      <p>{{currentRecipe?.method}}</p>
-    </ion-card-content>
+    <div *ngIf="buttonClicked" [formGroup]="commentArea">
+      <ion-item *ngFor="let comment of recipeCommentsList">
+        <ion-avatar item-start>
+          <img src="{{comment?.authorPic}}">
+        </ion-avatar>
+        <h3>{{comment?.authorFname}} {{comment?.authorLname}}</h3>
+        <p>{{comment?.recipeComment}}</p>
+      </ion-item>
+      <ion-row>
+        <ion-col col-3>
+          <ion-item><ion-avatar item-start>
+          <img [src]="this.currentUserMe.pic">
+        </ion-avatar></ion-item>
+        </ion-col>
+        <ion-col col-9>
+          <ion-textarea [(ngModel)]="recipeComment" placeholder="What do you think about {{currentRecipeChef?.firstName}}'s {{currentRecipe?.name}}?" formControlName="comment" name="comment"></ion-textarea>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-8>
+        </ion-col>
+        <ion-col col-4>
+      <button ion-button clear small (click)="commentEvent(currentRecipe.id, recipeComment)" [disabled]="!commentArea.valid">
+        <div>Comment</div>
+      </button>
+      </ion-col>
+    </ion-row>
+    </div>
   </ion-card>
 </ion-content>
