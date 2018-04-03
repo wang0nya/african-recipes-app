@@ -22,9 +22,27 @@ page-profile-view {
     }
 
     .card-subtitle {
-      font-size: 1.0em;
+      font-size: 1.5em;
       position: absolute;
       top: 52%;
+      width: 100%;
+      color: #fff;
+    }
+
+    .card-likes {
+      font-size: 1.0em;
+      position: absolute;
+      right: 40px;
+      top: 82%;
+      width: 100%;
+      color: #fff;
+    }
+
+    .card-comments {
+      font-size: 1.0em;
+      position: absolute;
+      right: -40px;
+      top: 82%;
       width: 100%;
       color: #fff;
     }

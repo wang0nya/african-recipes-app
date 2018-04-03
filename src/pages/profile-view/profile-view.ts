@@ -62,8 +62,8 @@ export class ProfileViewPage {
         if(this.currentUser.id == snap.val().chef.uid){
           this.recipeList.push({
             id: snap.key,
-            name: snap.val().name, ingredients: snap.val().ingredients, community: snap.val().community,
-            servings: snap.val().servings, method: snap.val().method, pic: snap.val().pic, likes: snap.val().likes,
+            name: snap.val().name, likes_count: snap.val().likes_count, community: snap.val().community,
+            comments_count: snap.val().comments_count, method: snap.val().method, pic: snap.val().pic, likes: snap.val().likes,
             firstName: snap.val().chef.firstName, lastName: snap.val().chef.lastName, ppic: snap.val().chef.pic
           });
         }
