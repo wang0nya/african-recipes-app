@@ -34,6 +34,23 @@ export class ProfileViewPage {
     this.profileProvider.getUserDetail(this.navParams.get("userId")).on("value", userSnapshot => {
       this.currentUser = userSnapshot.val().profile;
       this.currentUser.id = userSnapshot.key;
+      this.recipeProvider.recipeListRef
+      .once("value", recipeListSnapshot => {
+        this.recipeList = [];
+        this.likes_sum = 0;
+        recipeListSnapshot.forEach(snap => {
+          this.recipeProvider.recipeListRef
+          if (snap.val().chef.uid==this.currentUser.id){
+            console.log('jackpot!', snap.val().chef.uid);
+            this.likes_sum += snap.val().likes_count;
+            console.log("total likes", this.likes_sum);
+          }
+          else {
+            console.log("not yours");
+          }
+        return false;
+        });
+      });
     });
     this.profileProvider.getMyUserProfile().on("value", userSnapshot => {
       this.currentUserMe = userSnapshot.val();

@@ -26,6 +26,19 @@
   <br>
   <p text-center>{{currentUser?.status}}</p>
 </ion-item>
+<ion-grid>
+<ion-row>
+  <ion-col col-4>
+    <ion-item text-center>reputation<ion-badge id="badge">{{this.likes_sum}}</ion-badge></ion-item>
+  </ion-col>
+  <ion-col col-4>
+    <ion-item text-center>followers<ion-badge id="badge">26</ion-badge></ion-item>
+  </ion-col>
+  <ion-col col-4>
+    <ion-item text-center>following<ion-badge id="badge">{{currentUser?.followed_count}}</ion-badge></ion-item>
+  </ion-col>
+</ion-row>
+</ion-grid>
   <ion-list-header> Recipes
   </ion-list-header>
   <ion-card *ngFor="let recipe of recipeList" class="img-container" on-click="goToRecipeDetails(recipe.id)">
