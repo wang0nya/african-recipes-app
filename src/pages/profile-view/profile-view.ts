@@ -25,6 +25,7 @@ export class ProfileViewPage {
   public userId: string;
   public currentUser: any = {};
   public currentUserMe: any = {};
+  public likes_sum: number;
   constructor(public navCtrl: NavController, public navParams: NavParams, public profileProvider: ProfileProvider
   ,public recipeProvider: RecipeProvider) {
 
