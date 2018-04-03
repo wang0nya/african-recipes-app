@@ -14,7 +14,7 @@
       <ion-col>
         <button ion-button icon-left clear small (tap)="tapEvent(currentRecipe.id)">
           <ion-icon name="thumbs-up"></ion-icon>
-          <div>{{tap}}</div>
+          <div>{{currentRecipe?.likes_count}}</div>
         </button>
       </ion-col>
       <ion-col>
