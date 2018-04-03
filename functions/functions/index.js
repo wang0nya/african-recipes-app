@@ -7,7 +7,7 @@ admin.initializeApp(functions.config().firebase);
 // Keeps track of the length of the 'followed' child list in a separate property.
 exports.countfollowedchange = functions.database.ref('/userProfile/{userid}/followed/{followedid}').onWrite((event) => {
   const collectionRef = event.data.ref.parent;
-  const countRef = collectionRef.parent.child('followed_count');
+  const countRef = collectionRef.parent.child('profile/followed_count');
 
   let increment;
   if (event.data.exists() && !event.data.previous.exists()) {
