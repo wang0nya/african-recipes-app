@@ -42,7 +42,7 @@ imageRef: any;
         this.recipeList.push({
           id: snap.key,
           name: snap.val().name, ingredients: snap.val().ingredients, community: snap.val().community,
-          servings: snap.val().servings, likes_count: snap.val().likes_count, pic: snap.val().pic, likes: snap.val().likes,
+          comments_count: snap.val().comments_count, likes_count: snap.val().likes_count, pic: snap.val().pic, likes: snap.val().likes,
           firstName: snap.val().chef.firstName, lastName: snap.val().chef.lastName, ppic: snap.val().chef.pic
         });
         return false;
